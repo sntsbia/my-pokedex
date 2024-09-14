@@ -1,7 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("org.jetbrains.kotlin.kapt")
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.dagger.hilt)
 }
 
 android {
@@ -39,9 +40,7 @@ android {
     }
     buildFeatures {
         dataBinding = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        viewBinding = true
     }
     packaging {
         resources {
@@ -66,6 +65,9 @@ dependencies {
     implementation(libs.androidx.recyclerview)
     implementation(libs.glide)
     implementation(libs.material)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
     annotationProcessor(libs.compiler)
 
     implementation(libs.androidx.core.splashscreen)
@@ -73,6 +75,19 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+    // OkHttp
+    implementation(platform(libs.ok.http.bom))
+    implementation(libs.logging.interceptor)
+
+    // Dagger hilt
+    implementation(libs.dagger.hilt)
+    implementation(libs.hilt.navigation.compose)
+    ksp(libs.hilt.compiler)
 
 
 }
