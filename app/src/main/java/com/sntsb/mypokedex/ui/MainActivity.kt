@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.viewmodel.ViewModelFactoryDsl
 import com.sntsb.mypokedex.R
 import com.sntsb.mypokedex.databinding.ActivityMainBinding
 
