@@ -41,6 +41,7 @@ android {
     buildFeatures {
         dataBinding = true
         viewBinding = true
+        mlModelBinding = true
     }
     packaging {
         resources {
@@ -63,9 +64,11 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx) // Use a versão mais recente
 
     implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.paging.runtime.ktx)
     implementation(libs.glide)
     implementation(libs.material)
     implementation(libs.androidx.appcompat)
+    implementation (libs.androidx.gridlayout)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     annotationProcessor(libs.compiler)

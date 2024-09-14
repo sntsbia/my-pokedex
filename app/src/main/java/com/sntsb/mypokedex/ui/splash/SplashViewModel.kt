@@ -1,10 +1,11 @@
-package com.sntsb.mypokedex.ui
+package com.sntsb.mypokedex.ui.splash
 
 import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import androidx.activity.ComponentActivity
 import androidx.lifecycle.ViewModel
+import com.sntsb.mypokedex.ui.main.MainActivity
 
 class SplashViewModel : ViewModel() {
 

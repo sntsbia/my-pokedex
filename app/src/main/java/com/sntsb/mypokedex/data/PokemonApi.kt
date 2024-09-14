@@ -1,9 +1,9 @@
 package com.sntsb.mypokedex.data
 
-import com.sntsb.mypokedex.domain.model.PokemonDetalhesModel
-import com.sntsb.mypokedex.domain.model.PokemonImageModel
-import com.sntsb.mypokedex.domain.model.PokemonModel
-import com.sntsb.mypokedex.domain.model.TipoModel
+import com.sntsb.mypokedex.model.PokemonDetalhesModel
+import com.sntsb.mypokedex.model.PokemonImageModel
+import com.sntsb.mypokedex.model.PokemonModel
+import com.sntsb.mypokedex.model.TipoModel
 import retrofit2.http.GET
 import retrofit2.http.Path
 

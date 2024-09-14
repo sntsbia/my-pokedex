@@ -1,4 +1,4 @@
-package com.sntsb.mypokedex.ui
+package com.sntsb.mypokedex.ui.main
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -14,11 +14,24 @@ class MainViewModel @Inject constructor(private val repository: PokemonRepositor
     private val _texto = MutableLiveData<String>()
     val texto: LiveData<String> = _texto
 
+    private val _selected = MutableLiveData<String>()
+    val selected: LiveData<String> = _selected
+
     fun setTexto(novoTexto: String = repository.getPokemonList()) {
 
         _texto.value = novoTexto
         Log.e(TAG, "setTexto: ${texto.value}", )
     }
+
+    fun setSelected(novoTexto: String) {
+        _selected.value = novoTexto
+    }
+
+    fun refresh() {
+        _texto.value = ""
+        _selected.value = ""
+    }
+
 
     companion object {
         private const val TAG = "MainViewModel"

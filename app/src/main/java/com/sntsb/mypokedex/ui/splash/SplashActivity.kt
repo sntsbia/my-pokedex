@@ -1,12 +1,7 @@
-package com.sntsb.mypokedex.ui
+package com.sntsb.mypokedex.ui.splash
 
-import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.Window
-import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import com.sntsb.mypokedex.databinding.ActivitySplashBinding
