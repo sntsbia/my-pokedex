@@ -8,6 +8,8 @@ import androidx.databinding.DataBindingUtil
 import com.sntsb.mypokedex.R
 import com.sntsb.mypokedex.databinding.ActivityMainBinding
 
+
+//@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -37,8 +39,7 @@ class MainActivity : ComponentActivity() {
             e.printStackTrace()
         }
 
-
-
+        viewModel.setTexto()
 
     }
 }
