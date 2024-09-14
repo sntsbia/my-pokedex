@@ -1,46 +1,44 @@
 package com.sntsb.mypokedex.ui
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
+import android.util.Log
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.viewmodel.ViewModelFactoryDsl
 import com.sntsb.mypokedex.R
 import com.sntsb.mypokedex.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
-//@AndroidEntryPoint
-class MainActivity : ComponentActivity() {
-
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         actionBar?.setDisplayShowTitleEnabled(false)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        binding.myViewModel = viewModel
-
-        try {
-
-            val splashScreen = installSplashScreen()
-
-            splashScreen.setOnExitAnimationListener { splashScreenView ->
-                // Personalizar a animação de saída
-
-                splashScreenView.iconView.animate().setDuration(2500).alpha(0f).withEndAction {
-                    splashScreenView.remove()
-                }.start()
-
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
+        viewModel.texto.observe(this) { novoTexto ->
+            Log.d("MainActivity", "Novo texto: $novoTexto")
+            binding.tvSplash.invalidate()
         }
 
-        viewModel.setTexto()
+        binding.myViewModel = viewModel
 
+        viewModel.setTexto("Olá Mundo")
+
+        binding.btnTexto.setOnClickListener {
+            viewModel.setTexto()
+        }
+
+    }
+
+    companion object {
+        private const val TAG = "MainActivity"
     }
 }
