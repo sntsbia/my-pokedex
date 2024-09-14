@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.MyPokedex" parent="Theme.Material3.Dark.NoActionBar">
+
+        <item name="backgroundColor">@color/color_base</item>
+        <item name="colorOnPrimary">@color/color_texto</item>
+        <item name="android:statusBarColor">@color/color_secondary</item>
+
+    </style>
+
+</resources>

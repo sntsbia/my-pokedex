@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="color_base">#222222</color>
+
+    <color name="color_splash">#0D1117</color>
+
+    <color name="color_secondary">#D3D3D3</color>
+
+    <color name="color_titulo">#F0F8FF</color>
+    <color name="color_texto">#BBBBBB</color>
+
+    <color name="color_normal">#D3B35C</color>
+
+    <color name="color_fogo">#FF9933</color>
+    <color name="color_agua">#1E90FF</color>
+    <color name="color_grama">#7CFC00</color>
+    <color name="color_eletrico">#FFFF33</color>
+    <color name="color_gelo">#E0FFFF</color>
+    <color name="color_lutador">#FF4500</color>
+    <color name="color_veneno">#DA70D6</color>
+    <color name="color_terra">#A0522D</color>
+    <color name="color_voador">#ADD8E6</color>
+    <color name="color_psiquico">#FF1493</color>
+    <color name="color_inseto">#7FFF00</color>
+    <color name="color_pedra">#FFD700</color>
+    <color name="color_fantasma">#9370DB</color>
+    <color name="color_dragao">#0047AB</color>
+    <color name="color_metalico">#708090</color>
+    <color name="color_fada">#FF69B4</color>
+
+
+
+
+</resources>
