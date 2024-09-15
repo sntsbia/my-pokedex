@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.sntsb.mypokedex.R
 import com.sntsb.mypokedex.databinding.ActivityMainBinding
-import com.sntsb.mypokedex.ui.PokemonListFragment
+import com.sntsb.mypokedex.ui.pokemonList.PokemonListFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

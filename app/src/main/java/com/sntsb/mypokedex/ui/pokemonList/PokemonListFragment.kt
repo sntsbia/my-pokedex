@@ -12,9 +12,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
+import br.com.intelipec.firebase.dropdown.DropdownTipoList
+import com.sntsb.mypokedex.data.model.enums.TiposEnum
 import com.sntsb.mypokedex.databinding.FragmentPokemonListBinding
 import com.sntsb.mypokedex.ui.adapter.ItemPokemonAdapter
 import com.sntsb.mypokedex.utils.StringUtils
+import com.sntsb.mypokedex.utils.UiUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -27,6 +30,7 @@ class PokemonListFragment : Fragment() {
     private lateinit var mPokemonListViewModel: PokemonListViewModel
 
     private lateinit var pokemonAdapter: ItemPokemonAdapter
+    private lateinit var tiposAdapter: DropdownTipoList
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,6 +47,7 @@ class PokemonListFragment : Fragment() {
             binding.rvPokemons.layoutManager?.scrollToPosition(0)
 
         }
+        initDropdown()
 
         lifecycleScope.launch {
 
@@ -87,6 +92,32 @@ class PokemonListFragment : Fragment() {
 
                 mPokemonListViewModel.setSearchQuery(StringUtils.todasMinusculas(query))
             }
+        }
+    }
+
+    private fun initDropdown() {
+        val tipos = TiposEnum.entries.map {
+            UiUtils(requireContext()).getTipoLabel(it.stringResourceName)
+        }.toList().let {
+            ArrayList(it)
+        }
+
+        tipos.sort()
+
+        tiposAdapter = DropdownTipoList(
+            requireContext(),
+            tipos,
+            com.google.android.material.R.layout.support_simple_spinner_dropdown_item
+        )
+        binding.ddSearch.setAdapter(tiposAdapter)
+        tiposAdapter.notifyDataSetChanged()
+
+        binding.ddSearch.setOnItemClickListener { parent, view, position, id ->
+            val tipo = tiposAdapter.getItem(position)
+
+            Log.e(TAG, "initDropdown: $tipo")
+
+
         }
     }
 

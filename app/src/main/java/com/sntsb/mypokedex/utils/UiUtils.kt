@@ -25,6 +25,57 @@ class UiUtils (val context: Context) {
 
     }
 
+    fun getTipoByLabel(label: String): String {
+        when (label) {
+             context.resources.getString(R.string.normal) -> return "normal"
+             context.resources.getString(R.string.fighting) -> return "fighting"
+             context.resources.getString(R.string.flying) -> return "flying"
+             context.resources.getString(R.string.poison) -> return "poison"
+             context.resources.getString(R.string.ground) -> return "ground"
+             context.resources.getString(R.string.rock) -> return "rock"
+             context.resources.getString(R.string.bug) -> return "bug"
+             context.resources.getString(R.string.ghost) -> return "ghost"
+             context.resources.getString(R.string.steel) -> return "steel"
+             context.resources.getString(R.string.fire) -> return "fire"
+             context.resources.getString(R.string.water) -> return "water"
+             context.resources.getString(R.string.grass) -> return "grass"
+             context.resources.getString(R.string.electric) -> return "electric"
+             context.resources.getString(R.string.psychic) -> return "psychic"
+             context.resources.getString(R.string.ice) -> return "ice"
+             context.resources.getString(R.string.dragon) -> return "dragon"
+             context.resources.getString(R.string.dark) -> return "dark"
+             context.resources.getString(R.string.fairy) -> return "fairy"
+             context.resources.getString(R.string.shadow) -> return "shadow"
+            else -> return label
+        }
+    }
+
+    fun getTipoLabel(tipo: String): String {
+        when (tipo) {
+            "normal" -> return context.resources.getString(R.string.normal)
+            "fighting" -> return context.resources.getString(R.string.fighting)
+            "flying" -> return context.resources.getString(R.string.flying)
+            "poison" -> return context.resources.getString(R.string.poison)
+            "ground" -> return context.resources.getString(R.string.ground)
+            "rock" -> return context.resources.getString(R.string.rock)
+            "bug" -> return context.resources.getString(R.string.bug)
+            "ghost" -> return context.resources.getString(R.string.ghost)
+            "steel" -> return context.resources.getString(R.string.steel)
+            "fire" -> return context.resources.getString(R.string.fire)
+            "water" -> return context.resources.getString(R.string.water)
+            "grass" -> return context.resources.getString(R.string.grass)
+            "electric" -> return context.resources.getString(R.string.electric)
+            "psychic" -> return context.resources.getString(R.string.psychic)
+            "ice" -> return context.resources.getString(R.string.ice)
+            "dragon" -> return context.resources.getString(R.string.dragon)
+            "dark" -> return context.resources.getString(R.string.dark)
+            "fairy" -> return context.resources.getString(R.string.fairy)
+            "shadow" -> return context.resources.getString(R.string.shadow)
+            else -> return tipo
+
+        }
+    }
+
     fun getCorTipo(tipo: String): Int {
         when (tipo) {
 
