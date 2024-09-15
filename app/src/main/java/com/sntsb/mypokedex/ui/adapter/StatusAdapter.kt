@@ -10,6 +10,7 @@ import com.sntsb.mypokedex.data.model.dto.StatusDTO
 import com.sntsb.mypokedex.data.model.dto.TipoDTO
 import com.sntsb.mypokedex.databinding.ItemStatusBinding
 import com.sntsb.mypokedex.databinding.ItemTipoBinding
+import com.sntsb.mypokedex.utils.UiUtils
 
 class StatusAdapter(private val status: List<StatusDTO>, val context: Context) :
     RecyclerView.Adapter<StatusAdapter.StatusItemViewHolder>() {
@@ -19,7 +20,8 @@ class StatusAdapter(private val status: List<StatusDTO>, val context: Context) :
 
         fun bind(tipo: StatusDTO) {
             databinding.statusItemDataBinding = tipo
-            databinding.tvStatus.text = tipo.descricao
+
+            databinding.tvStatus.text = UiUtils(context).getStatusLabel(tipo.descricao)
             databinding.tvEstatistica.text = buildString { append(tipo.valor) }
         }
     }

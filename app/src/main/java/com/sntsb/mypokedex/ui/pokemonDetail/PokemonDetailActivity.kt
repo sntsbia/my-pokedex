@@ -20,7 +20,9 @@ import com.sntsb.mypokedex.data.model.dto.PokemonDetalhesDTO
 import com.sntsb.mypokedex.databinding.ActivityPokemonDetailBinding
 import com.sntsb.mypokedex.ui.adapter.StatusAdapter
 import com.sntsb.mypokedex.ui.adapter.TipoAdapter
+import com.sntsb.mypokedex.utils.MathUtils
 import com.sntsb.mypokedex.utils.StringUtils
+import com.sntsb.mypokedex.utils.UiUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
@@ -34,7 +36,7 @@ class PokemonDetailActivity : AppCompatActivity() {
         private const val TAG = "PokemonDetailActivity"
     }
 
-    private lateinit var binding : ActivityPokemonDetailBinding
+    private lateinit var binding: ActivityPokemonDetailBinding
 
     private val viewModel: PokemonDetailViewModel by viewModels()
 
@@ -48,9 +50,7 @@ class PokemonDetailActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         binding.toolbar.setNavigationOnClickListener {
-
             finish()
-
         }
 
         enableEdgeToEdge()
@@ -58,7 +58,7 @@ class PokemonDetailActivity : AppCompatActivity() {
         lifecycleScope.launch {
 
             viewModel.fotoVisivelIndex.observe(this@PokemonDetailActivity) { index ->
-                if(index != null) {
+                if (index != null) {
                     viewModel.pokemon.value?.imagem?.get(index)?.let {
                         Glide.with(binding.root).load(it.url).into(binding.ivPokemon)
                     }
@@ -66,8 +66,8 @@ class PokemonDetailActivity : AppCompatActivity() {
             }
 
             viewModel.pokemon.observe(this@PokemonDetailActivity) { pokemon ->
-                Log.e(TAG, "onCreate: $pokemon", )
-                if(pokemon != null) {
+                Log.e(TAG, "onCreate: $pokemon")
+                if (pokemon != null) {
 
                     initDados(pokemon)
                 }
@@ -78,7 +78,7 @@ class PokemonDetailActivity : AppCompatActivity() {
             }
 
             viewModel.id.observe(this@PokemonDetailActivity) { id ->
-                if(id != null) {
+                if (id != null) {
                     viewModel.getPokemon(id)
                 }
             }
@@ -92,7 +92,7 @@ class PokemonDetailActivity : AppCompatActivity() {
     }
 
     private fun isLoading(isLoading: Boolean) {
-        if(isLoading) {
+        if (isLoading) {
             binding.progressbarDetails.visibility = View.VISIBLE
         } else {
             binding.progressbarDetails.visibility = View.GONE
@@ -101,8 +101,19 @@ class PokemonDetailActivity : AppCompatActivity() {
 
     private fun initDados(pokemon: PokemonDetalhesDTO) {
         with(binding) {
-            Log.e(TAG, "initDados: $pokemon", )
+            Log.e(TAG, "initDados: $pokemon")
             tvDescricao.text = StringUtils.primeiraLetraCapitalize(pokemon.nome)
+
+            llFundo.setBackgroundResource(UiUtils(this@PokemonDetailActivity).getCorTipo(pokemon.tipos[0].descricao))
+
+            tvPeso.text = buildString {
+                append(MathUtils.converterHgToKg(pokemon.peso.toDouble()).let {"%.2f".format(it)})
+                append(" kg")
+            }
+            tvAltura.text = buildString {
+                append(MathUtils.converterDmToM(pokemon.altura.toDouble()).let {"%.2f".format(it)})
+                append(" m")
+            }
 
             tipoAdapter = TipoAdapter(pokemon.tipos, this@PokemonDetailActivity)
             rvTipos.adapter = tipoAdapter
@@ -116,7 +127,7 @@ class PokemonDetailActivity : AppCompatActivity() {
 
             ibProximo.setOnClickListener {
                 viewModel.fotoVisivelIndex.value?.let { index ->
-                    if(index < pokemon.imagem.size - 1) {
+                    if (index < pokemon.imagem.size - 1) {
                         viewModel.setFotoVisivelIndex(index + 1)
                     } else {
                         viewModel.setFotoVisivelIndex(0)

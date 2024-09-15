@@ -1,9 +1,10 @@
 package com.sntsb.mypokedex.utils
 
+import android.content.Context
 import com.sntsb.mypokedex.data.paging.PokemonPagingSource
 import com.sntsb.mypokedex.data.paging.PokemonPagingSource.Companion
 
-class PokemonUtils {
+class PokemonUtils() {
     companion object {
         private const val URL_IMAGEM_DEFAULT =
             "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/%d.png"

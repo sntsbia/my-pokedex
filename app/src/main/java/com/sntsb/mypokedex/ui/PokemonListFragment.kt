@@ -5,9 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.launch
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.sntsb.mypokedex.databinding.FragmentPokemonListBinding
@@ -62,7 +64,7 @@ class PokemonListFragment : Fragment() {
 
         lifecycleScope.launch {
             pokemonAdapter.loadStateFlow.collectLatest { loadStates ->
-                binding.swipeRefreshLayout.isRefreshing = loadStates.refresh is LoadState.Loading
+                mPokemonListViewModel.setLoading(loadStates.refresh is LoadState.Loading)
             }
         }
 
