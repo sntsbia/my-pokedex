@@ -33,52 +33,65 @@
                 android:padding="16dp">
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_dd_search"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    app:startIconDrawable="@drawable/ic_pokeball_36"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:id="@+id/dd_search"
+                        android:text=""
+                        android:textAppearance="?attr/textAppearanceBody2" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_search"
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
+                    app:endIconMode="clear_text"
+                    app:startIconDrawable="@drawable/ic_pokeball_36"
                     android:layout_height="wrap_content">
 
                     <com.google.android.material.textfield.TextInputEditText
                         style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:id="@+id/txt_search"
                         android:text=""
                         android:textAppearance="?attr/textAppearanceBody2" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <LinearLayout
+                <RadioGroup
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/cg_filtro"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        app:singleLine="true"
-                        app:singleSelection="true">
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chip_tipo"
+                    android:id="@+id/radioGroup"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+                    >
+                        <RadioButton
+                            android:id="@+id/radio_pokemon"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="8dp"
                             android:layout_weight="1"
-                            android:text="Chip 1" />
+                            android:layout_height="wrap_content"
+                            android:text="Pokemon"/>
 
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chip_nome"
+                        <RadioButton
+                            android:id="@+id/radio_tipo"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="8dp"
                             android:layout_weight="1"
-                            android:text="Chip 2" />
+                            android:layout_height="wrap_content"
+                            android:text="Tipo"/>
 
-                    </com.google.android.material.chip.ChipGroup>
-                </LinearLayout>
+
+                </RadioGroup>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_pokemons"

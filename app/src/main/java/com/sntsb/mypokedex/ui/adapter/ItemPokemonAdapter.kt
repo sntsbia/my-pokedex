@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.sntsb.mypokedex.databinding.ItemPokemonBinding
-import com.sntsb.mypokedex.model.dto.PokemonDTO
+import com.sntsb.mypokedex.data.model.dto.PokemonDTO
+import com.sntsb.mypokedex.utils.StringUtils
 
 class ItemPokemonAdapter(private val mContext: Context) :
     PagingDataAdapter<PokemonDTO, ItemPokemonAdapter.PokemonViewHolder>(POKEMON_COMPARATOR) {
@@ -37,7 +38,7 @@ class ItemPokemonAdapter(private val mContext: Context) :
 
         fun bind(pokemon: PokemonDTO) {
             databinding.pokemonItemDataBinding = pokemon
-            databinding.tvNomePokemon.text = pokemon.nome
+            databinding.tvNomePokemon.text = StringUtils.primeiraLetraCapitalize(pokemon.nome)
 
             Glide.with(databinding.root).load(pokemon.imagem).into(databinding.ivPokemon)
 

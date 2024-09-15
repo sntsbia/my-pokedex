@@ -6,7 +6,7 @@
 
         <variable
             name="PokemonItemDataBinding"
-            type="com.sntsb.mypokedex.model.dto.PokemonDTO" />
+            type="com.sntsb.mypokedex.data.model.dto.PokemonDTO" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

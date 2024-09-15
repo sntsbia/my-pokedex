@@ -1,4 +1,4 @@
-package com.sntsb.mypokedex.model
+package com.sntsb.mypokedex.data.model
 
 data class TipoModel(
 
