@@ -36,19 +36,11 @@ class PokemonListFragment : Fragment() {
         binding.rvPokemons.adapter = pokemonAdapter
         binding.rvPokemons.layoutManager = LinearLayoutManager(requireContext())
 
-        binding.progressbar.visibility = View.GONE
-
-        binding.txtSearch.addTextChangedListener {
-            mPokemonListViewModel.setSearchQuery(StringUtils.todasMinusculas(it?.trim()?.toString()?:""))
-        }
-
         binding.swipeRefreshLayout.setOnRefreshListener {
-            binding.progressbar.visibility = View.VISIBLE
 
             mPokemonListViewModel.refreshPokemonList()
+            binding.rvPokemons.scrollToPosition(0)
 
-            binding.swipeRefreshLayout.isRefreshing = false
-            binding.progressbar.visibility = View.GONE
         }
 
         lifecycleScope.launch {
@@ -58,26 +50,30 @@ class PokemonListFragment : Fragment() {
             }
 
             mPokemonListViewModel.pokemonPager.collectLatest { pagingData ->
-                Log.e(TAG, "onViewCreated: ################# ${pagingData}")
-                binding.progressbar.visibility = View.VISIBLE
 
                 pokemonAdapter.submitData(pagingData)
 
-                binding.progressbar.visibility = View.GONE
+                binding.swipeRefreshLayout.isRefreshing = false
+
             }
         }
 
         binding.radioGroup.setOnCheckedChangeListener { radioGroup, id ->
             when (id){
                 binding.radioPokemon.id -> {
-                    binding.tilSearch.visibility = View.VISIBLE
+                    binding.llSearch.visibility = View.VISIBLE
                     binding.tilDdSearch.visibility = View.GONE
                 }
                 binding.radioTipo.id -> {
-                    binding.tilSearch.visibility = View.GONE
+                    binding.llSearch.visibility = View.GONE
                     binding.tilDdSearch.visibility = View.VISIBLE
                 }
             }
+        }
+
+        binding.btnSearch.setOnClickListener {
+            val query = binding.txtSearch.text.toString()
+            mPokemonListViewModel.setSearchQuery(StringUtils.todasMinusculas(query))
         }
     }
 

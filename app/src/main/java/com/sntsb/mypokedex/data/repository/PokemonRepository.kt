@@ -21,12 +21,6 @@ class PokemonRepository @Inject constructor(private val pokemonApi: PokemonApi) 
             pagingSourceFactory = { PokemonPagingSource(pokemonApi, query) })
     }
 
-    suspend fun getPokemon(id: Int): PokemonModel? {
-
-
-        return null
-    }
-
     companion object
 
 }
