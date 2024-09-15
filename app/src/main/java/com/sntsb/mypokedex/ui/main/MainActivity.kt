@@ -1,25 +1,19 @@
 package com.sntsb.mypokedex.ui.main
 
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
-import android.view.View
-import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
-import com.google.android.material.chip.Chip
-import com.google.android.material.snackbar.Snackbar
 import com.sntsb.mypokedex.R
 import com.sntsb.mypokedex.databinding.ActivityMainBinding
+import com.sntsb.mypokedex.ui.PokemonListFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val viewModel: MainViewModel by viewModels()
+
+    private lateinit var mPokemonListFragment: PokemonListFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,38 +22,10 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        viewModel.texto.observe(this) { novoTexto ->
-            Log.d("MainActivity", "Novo texto: $novoTexto")
+        mPokemonListFragment = PokemonListFragment.newInstance()
 
-        }
-        viewModel.selected.observe(this) { novoTexto ->
-            Log.d("MainActivity", "selected: $novoTexto")
-        }
-
-        binding.myViewModel = viewModel
-
-        binding.cgFiltro.setOnCheckedStateChangeListener { group, checkedIds ->
-            Log.e(TAG, "onCreate: $checkedIds")
-            if(checkedIds.isEmpty()) {
-
-                viewModel.setSelected("")
-            } else {
-
-                findViewById<Chip>(checkedIds[0]).text?.let{
-                    viewModel.setSelected(it.toString())
-                }
-            }
-        }
-
-        binding.swipeRefreshLayout.setOnRefreshListener {
-            binding.progressbar.visibility = View.VISIBLE
-
-            Snackbar.make(binding.root, "Refresh", Snackbar.LENGTH_SHORT).show()
-            viewModel.refresh()
-
-            binding.swipeRefreshLayout.isRefreshing = false
-            binding.progressbar.visibility = View.GONE
-        }
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fl_lista_pokemon, mPokemonListFragment).commitAllowingStateLoss()
 
     }
 
