@@ -7,27 +7,14 @@ import com.sntsb.mypokedex.data.api.PokemonApi
 import com.sntsb.mypokedex.data.model.dto.PokemonDTO
 import com.sntsb.mypokedex.utils.PokemonUtils
 
-class PokemonPagingSource(private val pokemonApi: PokemonApi, private val query: String = "") : PagingSource<Int, PokemonDTO>() {
+class PokemonPagingSource(private val pokemonApi: PokemonApi) : PagingSource<Int, PokemonDTO>() {
 
-    private suspend fun getAllPaginado(
-        loadSize: Int,
-        offset: Int
-    ): List<PokemonDTO> {
+    var query = ""
 
-        val response = pokemonApi.getPokemonList(loadSize, offset)
-        Log.e(TAG, "load: ${response.results.size}")
-
-        val pokemonList = response.results.mapIndexed { index, pokemon ->
-            val id = offset + index + 1
-            val imageUrl = PokemonUtils.getPokemonImageUrl(id) // Função para obter a URL da imagem
-            PokemonDTO(
-                id, pokemon.name, imageUrl
-            )
-        }
-        return pokemonList
+    fun updateQuery(query: String) {
+        this.query = query
+        invalidate()
     }
-
-
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PokemonDTO> {
         try {
 
@@ -38,7 +25,16 @@ class PokemonPagingSource(private val pokemonApi: PokemonApi, private val query:
             val pageNumber = params.key ?: 0
             val offset = pageNumber * params.loadSize
 
-            val pokemonList = getAllPaginado(params.loadSize, offset)
+            val response = pokemonApi.getPokemonList(params.loadSize, offset)
+            Log.e(TAG, "load: ${response.results.size}")
+
+            val pokemonList = response.results.mapIndexed { index, pokemon ->
+                val id = offset + index + 1
+                val imageUrl = PokemonUtils.getPokemonImageUrl(id) // Função para obter a URL da imagem
+                PokemonDTO(
+                    id, pokemon.name, imageUrl
+                )
+            }
 
             return LoadResult.Page(
                 data = pokemonList,

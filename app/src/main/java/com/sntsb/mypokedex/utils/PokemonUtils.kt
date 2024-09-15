@@ -15,18 +15,32 @@ class PokemonUtils {
             "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/%d.png"
 
         fun getPokemonImageUrl(id: Int): String {
-            return String.format(java.util.Locale.getDefault(),
-                URL_IMAGEM_DEFAULT, id)
+            return if(id >= 0) {
+                String.format(java.util.Locale.getDefault(),
+                    URL_IMAGEM_DEFAULT, id)
+            } else {
+                ""
+            }
         }
 
         fun getPokemonShinyImageUrl(id: Int): String {
-            return String.format(java.util.Locale.getDefault(),
-                URL_IMAGEM_SHINY, id)
+            return if(id >= 0) {
+                return String.format(
+                    java.util.Locale.getDefault(),
+                    URL_IMAGEM_SHINY, id
+                )
+            } else {
+                ""
+            }
         }
 
         fun getPokemonTypeImageUrl(id: Int): String {
-            return String.format(java.util.Locale.getDefault(),
-                URL_IMAGEM_TIPO, id)
+            return if(id >= 0) {
+                String.format(java.util.Locale.getDefault(),
+                    URL_IMAGEM_TIPO, id)
+            } else {
+                ""
+            }
         }
 
     }

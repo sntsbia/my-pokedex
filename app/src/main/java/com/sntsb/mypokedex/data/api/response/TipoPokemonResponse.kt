@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class TipoPokemonResponse(
     @SerializedName("slot") val slot: String,
-    @SerializedName("type") val tipos: List<EspecificacaoResponse>
+    @SerializedName("type") val tipo: EspecificacaoResponse
 )

@@ -17,7 +17,7 @@ interface PokemonApi {
     ): PokemonResponse
 
     @GET("pokemon/{id}")
-    suspend fun getPokemonById(@Path("id") id: String): PokemonDetalhesResponse
+    suspend fun getPokemonById(@Path("id") id: String): PokemonDetalhesResponse?
 
     companion object {
         const val LIMIT = 20

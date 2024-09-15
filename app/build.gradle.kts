@@ -72,7 +72,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     annotationProcessor(libs.compiler)
-
+    implementation(libs.kotlinx.coroutines.android)
     implementation(libs.androidx.core.splashscreen)
 
     testImplementation(libs.junit)
