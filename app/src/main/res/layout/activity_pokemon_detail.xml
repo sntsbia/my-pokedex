@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.main.MainActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="32dp"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+                app:title="">
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:id="@+id/main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.pokemonDetail.PokemonDetailActivity">
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressbar_details"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                app:layout_constraintTop_toBottomOf="@id/progressbar_details"
+                android:layout_height="match_parent"
+                android:background="@color/color_agua"
+                android:orientation="vertical"
+                >
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_margin="16dp"
+                    app:cardCornerRadius="16dp"
+                    app:strokeWidth="1dp"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="16dp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:text="Pokemon"
+                            android:textAlignment="center"
+                            style="@style/TextAppearance.Material3.TitleLarge"
+                            android:id="@+id/tv_descricao"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center"
+                            android:layout_marginVertical="8dp"
+                            android:layout_below="@id/tv_descricao"
+                            android:id="@+id/ll_imagem">
+
+                            <ImageButton
+                                android:id="@+id/ib_voltar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_baseline_arrow_left_24"
+                                android:background="#00FFFFFF"/>
+                            <ImageView
+                                android:id="@+id/iv_pokemon"
+                                android:layout_width="128dp"
+                                android:layout_height="128dp"
+                                android:layout_marginHorizontal="16dp"
+                                android:src="@drawable/ic_pokeball_36"/>
+
+                            <ImageButton
+                                android:id="@+id/ib_proximo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_baseline_arrow_right_24"
+                                android:background="#00FFFFFF"/>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_margin="8dp"
+                            android:background="@color/black"
+                            android:id="@+id/divider"
+                            android:layout_below="@id/ll_imagem"/>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_marginVertical="8dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/rv_tipos"
+                            android:layout_below="@+id/divider"/>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_marginVertical="8dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/rv_tipos"
+                            android:id="@+id/rv_detalhes"/>
+
+                    </RelativeLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
+</layout>

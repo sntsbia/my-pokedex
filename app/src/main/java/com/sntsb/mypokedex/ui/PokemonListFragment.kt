@@ -5,11 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.paging.LoadState
+import androidx.recyclerview.widget.GridLayoutManager
 import com.sntsb.mypokedex.databinding.FragmentPokemonListBinding
 import com.sntsb.mypokedex.ui.adapter.ItemPokemonAdapter
 import com.sntsb.mypokedex.utils.StringUtils
@@ -29,32 +29,40 @@ class PokemonListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        pokemonAdapter = ItemPokemonAdapter(requireContext())
-
         mPokemonListViewModel = ViewModelProvider(this)[PokemonListViewModel::class.java]
 
+        pokemonAdapter = ItemPokemonAdapter(requireContext())
         binding.rvPokemons.adapter = pokemonAdapter
-        binding.rvPokemons.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvPokemons.layoutManager = GridLayoutManager(requireContext(),2)
 
         binding.swipeRefreshLayout.setOnRefreshListener {
 
             mPokemonListViewModel.refreshPokemonList()
-            binding.rvPokemons.scrollToPosition(0)
+            binding.rvPokemons.layoutManager?.scrollToPosition(0)
 
         }
 
         lifecycleScope.launch {
+
             mPokemonListViewModel.searchQuery.observe(viewLifecycleOwner) { query ->
-                Log.e(TAG, "onViewCreated: $query")
-                mPokemonListViewModel.getPokemonPager(StringUtils.todasMinusculas(query))
+                mPokemonListViewModel.getPokemonPager(query)
+            }
+
+            mPokemonListViewModel.loading.observe(viewLifecycleOwner) { loading ->
+                setLoading(loading)
             }
 
             mPokemonListViewModel.pokemonPager.collectLatest { pagingData ->
+                Log.e(TAG, "onViewCreated: atualizou")
 
                 pokemonAdapter.submitData(pagingData)
 
-                binding.swipeRefreshLayout.isRefreshing = false
+            }
+        }
 
+        lifecycleScope.launch {
+            pokemonAdapter.loadStateFlow.collectLatest { loadStates ->
+                binding.swipeRefreshLayout.isRefreshing = loadStates.refresh is LoadState.Loading
             }
         }
 
@@ -73,8 +81,15 @@ class PokemonListFragment : Fragment() {
 
         binding.btnSearch.setOnClickListener {
             val query = binding.txtSearch.text.toString()
-            mPokemonListViewModel.setSearchQuery(StringUtils.todasMinusculas(query))
+            if(mPokemonListViewModel.searchQuery.value != query) {
+
+                mPokemonListViewModel.setSearchQuery(StringUtils.todasMinusculas(query))
+            }
         }
+    }
+
+    private fun setLoading(loading: Boolean) {
+        binding.swipeRefreshLayout.isRefreshing = loading
     }
 
     override fun onCreateView(

@@ -1,6 +1,7 @@
 package com.sntsb.mypokedex.ui.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.sntsb.mypokedex.databinding.ItemPokemonBinding
 import com.sntsb.mypokedex.data.model.dto.PokemonDTO
+import com.sntsb.mypokedex.ui.pokemonDetail.PokemonDetailActivity
 import com.sntsb.mypokedex.utils.StringUtils
 
 class ItemPokemonAdapter(private val mContext: Context) :
@@ -44,11 +46,12 @@ class ItemPokemonAdapter(private val mContext: Context) :
 
             databinding.cvItemPokemon.setOnClickListener {
 
-                Snackbar.make(
-                    databinding.root,
-                    "${pokemon.let { "${it.nome} (${it.id})" }}}",
-                    Snackbar.LENGTH_LONG).show()
-                Log.e(TAG, "bind: Clicked: $pokemon")
+                mContext.startActivity(
+                    Intent(context, PokemonDetailActivity::class.java).apply {
+                        putExtra(PokemonDetailActivity.POKEMON_ID, pokemon.id)
+                    }
+                )
+
             }
 
         }
@@ -62,7 +65,7 @@ class ItemPokemonAdapter(private val mContext: Context) :
         private val POKEMON_COMPARATOR = object : DiffUtil.ItemCallback<PokemonDTO>() {
             // ...
             override fun areItemsTheSame(oldItem: PokemonDTO, newItem: PokemonDTO): Boolean {
-                return oldItem.id == newItem.id
+                return oldItem == newItem
             }
 
             override fun areContentsTheSame(oldItem: PokemonDTO, newItem: PokemonDTO): Boolean {
