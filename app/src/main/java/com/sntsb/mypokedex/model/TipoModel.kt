@@ -1,4 +1,7 @@
 package com.sntsb.mypokedex.model
 
-class TipoModel {
-}
+data class TipoModel(
+
+    val id: Int, val descricao: String
+
+)
