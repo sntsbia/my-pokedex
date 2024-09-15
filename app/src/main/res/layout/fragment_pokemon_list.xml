@@ -36,6 +36,7 @@
                     android:id="@+id/til_dd_search"
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
+                    android:visibility="gone"
                     app:startIconDrawable="@drawable/ic_pokeball_36"
                     android:layout_height="wrap_content">
 
@@ -50,10 +51,19 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <LinearLayout
+                    android:id="@+id/ll_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_search"
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
+                    android:layout_weight="1"
                     app:endIconMode="clear_text"
                     app:startIconDrawable="@drawable/ic_pokeball_36"
                     android:layout_height="wrap_content">
@@ -68,6 +78,15 @@
                         android:textAppearance="?attr/textAppearanceBody2" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+                    <ImageButton
+                        android:contentDescription="Pesquisar"
+                        android:id="@+id/btn_search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:backgroundTint="#00FFFFFF"
+                        android:src="@drawable/ic_baseline_search_24"/>
+                </LinearLayout>
 
                 <RadioGroup
                     android:layout_width="match_parent"
@@ -80,6 +99,7 @@
                             android:id="@+id/radio_pokemon"
                             android:layout_width="match_parent"
                             android:layout_weight="1"
+                            android:checked="true"
                             android:layout_height="wrap_content"
                             android:text="Pokemon"/>
 
