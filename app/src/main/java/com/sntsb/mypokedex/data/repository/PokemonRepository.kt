@@ -12,6 +12,7 @@ import com.sntsb.mypokedex.data.model.dto.PokemonDetalhesDTO
 import com.sntsb.mypokedex.data.model.dto.StatusDTO
 import com.sntsb.mypokedex.data.model.dto.TipoDTO
 import com.sntsb.mypokedex.data.paging.PagingParams
+import com.sntsb.mypokedex.data.paging.PokemonByTipoPagingSource
 import com.sntsb.mypokedex.data.paging.PokemonPagingSource
 import com.sntsb.mypokedex.utils.PokemonUtils
 import kotlinx.coroutines.flow.Flow
@@ -19,7 +20,6 @@ import javax.inject.Inject
 
 /** Classe que define o repositório de dados do aplicativo (faz chamadas para API) **/
 class PokemonRepository @Inject constructor(private val pokemonApi: PokemonApi) {
-
 
     private fun getPagingSource(filtro: String): PagingSource<Int, PokemonDTO> {
         val pagingParams = PagingParams(
@@ -33,6 +33,15 @@ class PokemonRepository @Inject constructor(private val pokemonApi: PokemonApi) 
             pagingSourceFactory = { getPagingSource(filtro) }).flow
     }
 
+    fun getPokemonByTipoPager(
+        itemList: List<PokemonDTO>,
+        pageSize: Int = PokemonApi.LIMIT
+    ): Pager<Int, PokemonDTO> {
+        return Pager(config = PagingConfig(
+            pageSize = pageSize, enablePlaceholders = false
+        ), pagingSourceFactory = { PokemonByTipoPagingSource(itemList) })
+    }
+
     suspend fun getOne(id: String): PokemonDetalhesDTO? {
         try {
 
@@ -42,39 +51,37 @@ class PokemonRepository @Inject constructor(private val pokemonApi: PokemonApi) 
 
                 Log.e(TAG, "getOne: ${pokemon}")
 
-                val status = pokemon.stats.map { stat ->
-                    StatusDTO(stat.stat.name, stat.valorBase)
+                val status = pokemon.estatisticas.map { stat ->
+                    StatusDTO(stat.estatistica.nome, stat.valorBase)
                 }
 
-                val tipos = pokemon.types.map { type ->
+                val tipos = pokemon.tipos.map { type ->
 
                     val idTipo = type.tipo.url.split("/").let { it[it.size - 2] }
                     val imagem = PokemonUtils.getPokemonTypeImageUrl(idTipo.toIntOrNull() ?: -1)
                     TipoDTO(
-                        idTipo.toIntOrNull() ?: -1, type.tipo.name, imagem
+                        idTipo.toIntOrNull() ?: -1, type.tipo.nome, imagem
                     )
                 }
 
                 val imagemArray = ArrayList<ImagemDTO>()
                 imagemArray.add(
                     ImagemDTO(
-                        ImagemDTO.IMAGEM_FRONT,
-                        PokemonUtils.getPokemonImageUrl(pokemon.id)
+                        ImagemDTO.IMAGEM_FRONT, PokemonUtils.getPokemonImageUrl(pokemon.id)
                     )
                 )
                 imagemArray.add(
                     ImagemDTO(
-                        ImagemDTO.IMAGEM_SHINY,
-                        PokemonUtils.getPokemonShinyImageUrl(pokemon.id)
+                        ImagemDTO.IMAGEM_SHINY, PokemonUtils.getPokemonShinyImageUrl(pokemon.id)
                     )
                 )
 
                 PokemonDetalhesDTO(
                     pokemon.id,
-                    pokemon.name,
+                    pokemon.nome,
                     imagemArray,
-                    pokemon.height,
-                    pokemon.weight,
+                    pokemon.altura,
+                    pokemon.peso,
                     tipos,
                     status
                 )

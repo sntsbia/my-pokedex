@@ -6,22 +6,20 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Filter
 import android.widget.TextView
-import com.sntsb.mypokedex.data.model.enums.TiposEnum
+import com.sntsb.mypokedex.data.model.dto.TipoDTO
 import com.sntsb.mypokedex.utils.UiUtils
 import java.util.Locale
 
 class DropdownTipoList(
     private val mContext: Context,
-    private var values: ArrayList<String>,
+    private var values: ArrayList<TipoDTO>,
     private var textViewResourceId: Int,
-) : ArrayAdapter<String>(
-    mContext,
-    textViewResourceId,
-    values
+) : ArrayAdapter<TipoDTO>(
+    mContext, textViewResourceId, values
 ) {
 
-    var filtered = ArrayList<String>()
-    var original = ArrayList<String>()
+    var filtered = ArrayList<TipoDTO>()
+    var original = ArrayList<TipoDTO>()
 
     init {
         this.filtered = values
@@ -31,7 +29,7 @@ class DropdownTipoList(
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val label = super.getView(position, convertView, parent) as TextView
 
-        label.text = filtered[position]
+        label.text = UiUtils(mContext).getTipoLabel(filtered[position].descricao)
 
         return label
     }
@@ -39,23 +37,12 @@ class DropdownTipoList(
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
         val label = super.getDropDownView(position, convertView, parent) as TextView
 
-        val pokemonType = TiposEnum.valueOf(filtered[position])
-        val stringResource = pokemonType.stringResourceName
-
-        val typeString = UiUtils(mContext).getTipoLabel(stringResource)
-
-        label.text = typeString
+        label.text = UiUtils(mContext).getTipoLabel(filtered[position].descricao)
         return label
     }
 
-    override fun add(str: String?) {
-        if (str != null) {
-            if (!original.contains(str)) {
-                original.add(str)
-                original.sort()
-                notifyDataSetChanged()
-            }
-        }
+    override fun add(str: TipoDTO?) {
+
     }
 
     override fun getCount() = filtered.size
@@ -79,11 +66,11 @@ class DropdownTipoList(
             return results
         }
 
-        private fun autocomplete(input: String): ArrayList<String> {
-            val results = arrayListOf<String>()
+        private fun autocomplete(input: String): ArrayList<TipoDTO> {
+            val results = arrayListOf<TipoDTO>()
 
             for (value in values) {
-                if (value.lowercase(Locale.getDefault())
+                if (value.descricao.lowercase(Locale.getDefault())
                         .contains(input.lowercase(Locale.getDefault()))
                 ) results.add(
                     value
@@ -94,10 +81,11 @@ class DropdownTipoList(
         }
 
         override fun publishResults(constraint: CharSequence?, results: FilterResults) {
-            filtered = results.values as ArrayList<String>
+            filtered = results.values as ArrayList<TipoDTO>
             notifyDataSetInvalidated()
         }
 
-        override fun convertResultToString(result: Any) = (result as String)
+        override fun convertResultToString(result: Any) =
+            UiUtils(mContext).getTipoLabel((result as TipoDTO).descricao)
     }
 }

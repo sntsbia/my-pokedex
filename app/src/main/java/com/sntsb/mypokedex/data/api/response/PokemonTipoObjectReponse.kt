@@ -2,6 +2,6 @@ package com.sntsb.mypokedex.data.api.response
 
 import com.google.gson.annotations.SerializedName
 
-data class PokemonTipoResponse(
-    @SerializedName("pokemon") val pokemon: EspecificacaoResponse
+data class PokemonTipoObjectReponse(
+    @SerializedName("type") val tipo: EspecificacaoResponse
 )

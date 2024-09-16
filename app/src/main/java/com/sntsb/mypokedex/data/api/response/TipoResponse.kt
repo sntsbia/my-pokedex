@@ -6,5 +6,10 @@ data class TipoResponse(
     @SerializedName("count") val count: Int,
     @SerializedName("next") val next: String?,
     @SerializedName("previous") val previous: String?,
-    @SerializedName("results") val results: List<TipoPokemonResponse>
-)
+    @SerializedName("results") val results: List<EspecificacaoResponse>
+) {
+    override fun toString(): String {
+        return "TipoResponse(count=$count, next=$next, previous=$previous, results=$results)"
+    }
+
+}

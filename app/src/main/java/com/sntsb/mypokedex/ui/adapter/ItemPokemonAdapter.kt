@@ -2,7 +2,6 @@ package com.sntsb.mypokedex.ui.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -10,9 +9,8 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.android.material.snackbar.Snackbar
-import com.sntsb.mypokedex.databinding.ItemPokemonBinding
 import com.sntsb.mypokedex.data.model.dto.PokemonDTO
+import com.sntsb.mypokedex.databinding.ItemPokemonBinding
 import com.sntsb.mypokedex.ui.pokemonDetail.PokemonDetailActivity
 import com.sntsb.mypokedex.utils.StringUtils
 import com.sntsb.mypokedex.utils.UiUtils
@@ -46,19 +44,20 @@ class ItemPokemonAdapter(private val mContext: Context) :
 
             Glide.with(databinding.root).load(pokemon.imagem).into(databinding.ivPokemon)
 
-            if(pokemon.tipos.isNotEmpty()){
+            if (pokemon.tipos.isNotEmpty()) {
                 pokemon.tipos.firstOrNull()?.let { tipo ->
-                    databinding.cvItemPokemon.backgroundTintList = ContextCompat.getColorStateList(context, UiUtils(context).getCorTipo(tipo.descricao))
+                    databinding.cvItemPokemon.backgroundTintList = ContextCompat.getColorStateList(
+                        context,
+                        UiUtils(context).getCorTipo(tipo.descricao)
+                    )
                 }
             }
 
             databinding.cvItemPokemon.setOnClickListener {
 
-                mContext.startActivity(
-                    Intent(context, PokemonDetailActivity::class.java).apply {
-                        putExtra(PokemonDetailActivity.POKEMON_ID, pokemon.id)
-                    }
-                )
+                mContext.startActivity(Intent(context, PokemonDetailActivity::class.java).apply {
+                    putExtra(PokemonDetailActivity.POKEMON_ID, pokemon.id)
+                })
 
             }
 

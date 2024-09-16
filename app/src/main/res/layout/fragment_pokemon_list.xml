@@ -25,95 +25,114 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til_dd_search"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                <LinearLayout
+                    android:id="@+id/ll_dd_search"
                     android:layout_width="match_parent"
-                    android:visibility="gone"
-                    app:startIconDrawable="@drawable/ic_pokeball_36"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
-                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                        style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox"
-                        android:layout_width="match_parent"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_dd_search"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:inputType="text"
-                        android:id="@+id/dd_search"
-                        android:text=""
-                        android:textAppearance="?attr/textAppearanceBody2" />
+                        android:layout_weight="1"
+                        app:startIconDrawable="@drawable/ic_pokeball_36">
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                            android:id="@+id/dd_search"
+                            style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:text=""
+                            android:textAppearance="?attr/textAppearanceBody2" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageButton
+                        android:id="@+id/btn_limpar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:backgroundTint="#00FFFFFF"
+                        android:contentDescription="Limpar"
+                        android:src="@drawable/ic_baseline_close_24"
+                        android:visibility="gone" />
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:id="@+id/ll_search"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="8dp">
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
 
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til_search"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    app:endIconMode="clear_text"
-                    app:startIconDrawable="@drawable/ic_pokeball_36"
-                    android:layout_height="wrap_content">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_search"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text"
-                        android:id="@+id/txt_search"
-                        android:text=""
-                        android:textAppearance="?attr/textAppearanceBody2" />
+                        android:layout_weight="1"
+                        app:endIconMode="clear_text"
+                        app:startIconDrawable="@drawable/ic_pokeball_36">
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txt_search"
+                            style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:text=""
+                            android:textAppearance="?attr/textAppearanceBody2" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
                     <ImageButton
-                        android:contentDescription="Pesquisar"
                         android:id="@+id/btn_search"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:backgroundTint="#00FFFFFF"
-                        android:src="@drawable/ic_baseline_search_24"/>
+                        android:contentDescription="Pesquisar"
+                        android:src="@drawable/ic_baseline_search_24" />
                 </LinearLayout>
 
                 <RadioGroup
+                    android:id="@+id/radioGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/radioGroup"
-                    android:orientation="horizontal"
                     android:layout_marginTop="8dp"
-                    >
-                        <RadioButton
-                            android:id="@+id/radio_pokemon"
-                            android:layout_width="match_parent"
-                            android:layout_weight="1"
-                            android:checked="true"
-                            android:layout_height="wrap_content"
-                            android:text="Pokemon"/>
+                    android:orientation="horizontal">
 
-                        <RadioButton
-                            android:id="@+id/radio_tipo"
-                            android:layout_width="match_parent"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:text="Tipo"/>
+                    <RadioButton
+                        android:id="@+id/radio_pokemon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="true"
+                        android:text="Pokemon" />
+
+                    <RadioButton
+                        android:id="@+id/radio_tipo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Tipo" />
 
 
                 </RadioGroup>
 
                 <TextView
+                    android:id="@+id/tv_empty_list"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Sem Informações"
-                    android:id="@+id/tv_empty_list"
                     android:layout_gravity="center"
-                    android:visibility="gone"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:text="Sem Informações"
+                    android:visibility="gone" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_pokemons"

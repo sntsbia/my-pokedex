@@ -3,10 +3,10 @@ package com.sntsb.mypokedex.data.api.response
 import com.google.gson.annotations.SerializedName
 
 data class PokemonDetalhesResponse(
-    @SerializedName("height") val height: Int,
+    @SerializedName("height") val altura: Int,
     @SerializedName("id") val id: Int,
-    @SerializedName("name") val name: String,
-    @SerializedName("weight") val weight: Int,
-    @SerializedName("stats") val stats: List<StatusResponse>,
-    @SerializedName("types") val types: List<TipoPokemonResponse>,
+    @SerializedName("name") val nome: String,
+    @SerializedName("weight") val peso: Int,
+    @SerializedName("stats") val estatisticas: List<StatusResponse>,
+    @SerializedName("types") val tipos: List<PokemonTipoObjectReponse>,
 )

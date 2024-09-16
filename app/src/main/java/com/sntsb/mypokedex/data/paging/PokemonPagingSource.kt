@@ -30,15 +30,15 @@ class PokemonPagingSource(private val pokemonApi: PokemonApi, private val params
                     val imageUrl =
                         PokemonUtils.getPokemonImageUrl(pokemonDetalhesResponse.id) // Função para obter a URL da imagem
                     val dto = PokemonDTO(pokemonDetalhesResponse.id,
-                        pokemonDetalhesResponse.name,
+                        pokemonDetalhesResponse.nome,
                         imageUrl,
-                        pokemonDetalhesResponse.types.map { type ->
+                        pokemonDetalhesResponse.tipos.map { type ->
                             val idTipo = type.tipo.url.split("/").let { it[it.size - 2] }
                             val imagem =
                                 PokemonUtils.getPokemonTypeImageUrl(idTipo.toIntOrNull() ?: -1)
 
                             TipoDTO(
-                                idTipo.toIntOrNull() ?: -1, type.tipo.name, imagem
+                                idTipo.toIntOrNull() ?: -1, type.tipo.nome, imagem
                             )
                         })
                     pokemonList.add(dto)
@@ -54,16 +54,15 @@ class PokemonPagingSource(private val pokemonApi: PokemonApi, private val params
 
                     val id = offset + index + 1
 
-                    val pokemonDetalhesDTO = pokemonApi.getPokemonById(pokemon.name)
+                    val pokemonDetalhesDTO = pokemonApi.getPokemonById(pokemon.nome)
 
-                    val imageUrl =
-                        PokemonUtils.getPokemonImageUrl(id)
-                    PokemonDTO(id, pokemon.name, imageUrl, pokemonDetalhesDTO?.types?.map { type ->
+                    val imageUrl = PokemonUtils.getPokemonImageUrl(id)
+                    PokemonDTO(id, pokemon.nome, imageUrl, pokemonDetalhesDTO?.tipos?.map { type ->
                         val idTipo = type.tipo.url.split("/").let { it[it.size - 2] }
                         val imagem = PokemonUtils.getPokemonTypeImageUrl(idTipo.toIntOrNull() ?: -1)
 
                         TipoDTO(
-                            idTipo.toIntOrNull() ?: -1, type.tipo.name, imagem
+                            idTipo.toIntOrNull() ?: -1, type.tipo.nome, imagem
                         )
                     } ?: emptyList())
                 }
@@ -91,8 +90,7 @@ class PokemonPagingSource(private val pokemonApi: PokemonApi, private val params
                 e.printStackTrace()
                 return LoadResult.Error(e)
             }
-        }
-        catch (e: Exception) {
+        } catch (e: Exception) {
             Log.e(TAG, "load: Error: ${e.message}")
             e.printStackTrace()
             return LoadResult.Error(e)

@@ -5,6 +5,6 @@ import com.google.gson.annotations.SerializedName
 data class StatusResponse(
     @SerializedName("base_stat") val valorBase: Int,
     @SerializedName("effort") val effort: Int,
-    @SerializedName("stat") val stat: EspecificacaoResponse
+    @SerializedName("stat") val estatistica: EspecificacaoResponse
 
 )

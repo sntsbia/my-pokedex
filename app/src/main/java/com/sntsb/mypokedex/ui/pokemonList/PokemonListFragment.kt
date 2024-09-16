@@ -53,8 +53,6 @@ class PokemonListFragment : Fragment() {
             binding.rvPokemons.layoutManager?.scrollToPosition(0)
 
         }
-        initDropdown()
-
 
         mPokemonListViewModel.setQueryString("")
 
@@ -63,7 +61,27 @@ class PokemonListFragment : Fragment() {
         }
 
         mPokemonListViewModel.pagingData.observe(viewLifecycleOwner) { pagingData ->
-            pokemonAdapter.submitData(viewLifecycleOwner.lifecycle, pagingData)
+            if (binding.radioGroup.checkedRadioButtonId == binding.radioPokemon.id || binding.ddSearch.text.isNullOrEmpty()) {
+                pokemonAdapter.submitData(viewLifecycleOwner.lifecycle, pagingData)
+            }
+        }
+        mPokemonListViewModel.pagingDataByTipo.observe(viewLifecycleOwner) { pagingData ->
+            if (binding.radioGroup.checkedRadioButtonId == binding.radioTipo.id && !binding.ddSearch.text.isNullOrEmpty()) {
+                pokemonAdapter.submitData(viewLifecycleOwner.lifecycle, pagingData)
+            }
+        }
+
+        mPokemonListViewModel.tipos.observe(viewLifecycleOwner) { tipos ->
+            tiposAdapter = DropdownTipoList(
+                requireContext(), tipos, android.R.layout.simple_spinner_dropdown_item
+            )
+            binding.ddSearch.setAdapter(tiposAdapter)
+
+            binding.ddSearch.setOnItemClickListener { parent, view, position, id ->
+                val tipo = tiposAdapter.getItem(position)
+                mPokemonListViewModel.setByTipo(tipo.id.toString())
+                binding.btnLimpar.visibility = View.VISIBLE
+            }
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -88,12 +106,12 @@ class PokemonListFragment : Fragment() {
             when (id) {
                 binding.radioPokemon.id -> {
                     binding.llSearch.visibility = View.VISIBLE
-                    binding.tilDdSearch.visibility = View.GONE
+                    binding.llDdSearch.visibility = View.GONE
                 }
 
                 binding.radioTipo.id -> {
                     binding.llSearch.visibility = View.GONE
-                    binding.tilDdSearch.visibility = View.VISIBLE
+                    binding.llDdSearch.visibility = View.VISIBLE
                 }
             }
         }
@@ -106,35 +124,15 @@ class PokemonListFragment : Fragment() {
             }
         }
 
+        binding.btnLimpar.setOnClickListener {
+            binding.ddSearch.setText("")
+            binding.btnLimpar.visibility = View.GONE
+            mPokemonListViewModel.setByTipo("")
+        }
+
         binding.tilSearch.setEndIconOnClickListener {
             binding.txtSearch.setText("")
             mPokemonListViewModel.setQueryString("")
-        }
-    }
-
-    private fun initDropdown() {
-        val tipos = TiposEnum.entries.map {
-            UiUtils(requireContext()).getTipoLabel(it.stringResourceName)
-        }.toList().let {
-            ArrayList(it)
-        }
-
-        tipos.sort()
-
-        tiposAdapter = DropdownTipoList(
-            requireContext(),
-            tipos,
-            com.google.android.material.R.layout.support_simple_spinner_dropdown_item
-        )
-        binding.ddSearch.setAdapter(tiposAdapter)
-        tiposAdapter.notifyDataSetChanged()
-
-        binding.ddSearch.setOnItemClickListener { parent, view, position, id ->
-            val tipo = tiposAdapter.getItem(position)
-
-            Log.e(TAG, "initDropdown: $tipo")
-
-
         }
     }
 

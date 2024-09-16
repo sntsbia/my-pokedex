@@ -8,7 +8,8 @@ import com.sntsb.mypokedex.data.model.dto.PokemonDTO
 import com.sntsb.mypokedex.data.model.dto.TipoDTO
 import com.sntsb.mypokedex.utils.PokemonUtils
 
-class TipoPagingSource(private val pokemonApi: PokemonApi, private val query: String = "") : PagingSource<Int, PokemonDTO>() {
+class TipoPagingSource(private val pokemonApi: PokemonApi, private val query: String = "") :
+    PagingSource<Int, PokemonDTO>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PokemonDTO> {
         try {
 
@@ -23,17 +24,17 @@ class TipoPagingSource(private val pokemonApi: PokemonApi, private val query: St
             val pokemonList = response.results.mapIndexed { index, pokemon ->
                 val id = offset + index + 1
                 val imageUrl = PokemonUtils.getPokemonImageUrl(id)
-                val pokemonDetalhesDTO = pokemonApi.getPokemonById(pokemon.name)
+                val pokemonDetalhesDTO = pokemonApi.getPokemonById(pokemon.nome)
 
                 PokemonDTO(
-                    id, pokemon.name, imageUrl,pokemonDetalhesDTO?.types?.map { type->
+                    id, pokemon.nome, imageUrl, pokemonDetalhesDTO?.tipos?.map { type ->
                         val idTipo = type.tipo.url.split("/").let { it[it.size - 2] }
                         val imagem = PokemonUtils.getPokemonTypeImageUrl(idTipo.toIntOrNull() ?: -1)
 
                         TipoDTO(
-                            idTipo.toIntOrNull() ?: -1, type.tipo.name, imagem
+                            idTipo.toIntOrNull() ?: -1, type.tipo.nome, imagem
                         )
-                    }?: emptyList()
+                    } ?: emptyList()
                 )
             }
 
