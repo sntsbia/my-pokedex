@@ -14,6 +14,7 @@ import br.com.intelipec.firebase.dropdown.DropdownTipoList
 import com.sntsb.mypokedex.data.model.enums.TiposEnum
 import com.sntsb.mypokedex.databinding.FragmentPokemonListBinding
 import com.sntsb.mypokedex.ui.adapter.ItemPokemonAdapter
+import com.sntsb.mypokedex.ui.adapter.LoadStateAdapter
 import com.sntsb.mypokedex.utils.StringUtils
 import com.sntsb.mypokedex.utils.UiUtils
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,7 +38,13 @@ class PokemonListFragment : Fragment() {
         mPokemonListViewModel = ViewModelProvider(this)[PokemonListViewModel::class.java]
 
         pokemonAdapter = ItemPokemonAdapter(requireContext())
-        binding.rvPokemons.adapter = pokemonAdapter
+        binding.rvPokemons.adapter =
+            pokemonAdapter.withLoadStateFooter(footer = LoadStateAdapter(object :
+                LoadStateAdapter.OnAction {
+                override fun isLoading(loading: Boolean) {
+                    setLoading(loading)
+                }
+            }))
         binding.rvPokemons.layoutManager = GridLayoutManager(requireContext(), 2)
 
         binding.swipeRefreshLayout.setOnRefreshListener {
@@ -66,7 +73,8 @@ class PokemonListFragment : Fragment() {
         }
 
         pokemonAdapter.addLoadStateListener { loadStates ->
-            val isEmpty = pokemonAdapter.itemCount == 0 && loadStates.refresh is LoadState.NotLoading
+            val isEmpty =
+                pokemonAdapter.itemCount == 0 && loadStates.refresh is LoadState.NotLoading
             if (isEmpty) {
                 binding.tvEmptyList.visibility = View.VISIBLE
                 binding.rvPokemons.visibility = View.GONE
