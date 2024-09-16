@@ -65,6 +65,17 @@ class PokemonListFragment : Fragment() {
             }
         }
 
+        pokemonAdapter.addLoadStateListener { loadStates ->
+            val isEmpty = pokemonAdapter.itemCount == 0 && loadStates.refresh is LoadState.NotLoading
+            if (isEmpty) {
+                binding.tvEmptyList.visibility = View.VISIBLE
+                binding.rvPokemons.visibility = View.GONE
+            } else {
+                binding.tvEmptyList.visibility = View.GONE
+                binding.rvPokemons.visibility = View.VISIBLE
+            }
+        }
+
         binding.radioGroup.setOnCheckedChangeListener { radioGroup, id ->
             when (id) {
                 binding.radioPokemon.id -> {

@@ -22,7 +22,7 @@ class TipoPagingSource(private val pokemonApi: PokemonApi, private val query: St
 
             val pokemonList = response.results.mapIndexed { index, pokemon ->
                 val id = offset + index + 1
-                val imageUrl = PokemonUtils.getPokemonImageUrl(id) // Função para obter a URL da imagem
+                val imageUrl = PokemonUtils.getPokemonImageUrl(id)
                 val pokemonDetalhesDTO = pokemonApi.getPokemonById(pokemon.name)
 
                 PokemonDTO(

@@ -57,7 +57,7 @@ class PokemonPagingSource(private val pokemonApi: PokemonApi, private val params
                     val pokemonDetalhesDTO = pokemonApi.getPokemonById(pokemon.name)
 
                     val imageUrl =
-                        PokemonUtils.getPokemonImageUrl(id) // Função para obter a URL da imagem
+                        PokemonUtils.getPokemonImageUrl(id)
                     PokemonDTO(id, pokemon.name, imageUrl, pokemonDetalhesDTO?.types?.map { type ->
                         val idTipo = type.tipo.url.split("/").let { it[it.size - 2] }
                         val imagem = PokemonUtils.getPokemonTypeImageUrl(idTipo.toIntOrNull() ?: -1)
@@ -69,6 +69,7 @@ class PokemonPagingSource(private val pokemonApi: PokemonApi, private val params
                 }
             }
 
+            Log.e(TAG, "load: ${pokemonList.size}")
             return LoadResult.Page(
                 data = pokemonList, prevKey = if (pokemonList.size > 1) {
                     if (pageNumber == 0) null else pageNumber - 1
@@ -80,7 +81,18 @@ class PokemonPagingSource(private val pokemonApi: PokemonApi, private val params
                     null
                 }
             )
-        } catch (e: Exception) {
+        } catch (e: retrofit2.HttpException) {
+            if (e.code() == 404) {
+                return LoadResult.Page(
+                    data = emptyList(), prevKey = null, nextKey = null
+                )
+            } else {
+                Log.e(TAG, "load: Error: ${e.message}")
+                e.printStackTrace()
+                return LoadResult.Error(e)
+            }
+        }
+        catch (e: Exception) {
             Log.e(TAG, "load: Error: ${e.message}")
             e.printStackTrace()
             return LoadResult.Error(e)

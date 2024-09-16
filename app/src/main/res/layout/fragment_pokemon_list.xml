@@ -106,6 +106,15 @@
 
                 </RadioGroup>
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Sem Informações"
+                    android:id="@+id/tv_empty_list"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    android:gravity="center"/>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_pokemons"
                     android:layout_width="match_parent"

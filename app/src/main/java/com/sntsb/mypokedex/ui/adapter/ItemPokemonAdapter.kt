@@ -71,7 +71,7 @@ class ItemPokemonAdapter(private val mContext: Context) :
         const val TAG = "ItemPokemonAdapter"
 
         private val POKEMON_COMPARATOR = object : DiffUtil.ItemCallback<PokemonDTO>() {
-            // ...
+
             override fun areItemsTheSame(oldItem: PokemonDTO, newItem: PokemonDTO): Boolean {
                 return oldItem == newItem
             }

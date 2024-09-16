@@ -33,14 +33,6 @@ class PokemonRepository @Inject constructor(private val pokemonApi: PokemonApi) 
             pagingSourceFactory = { getPagingSource(filtro) }).flow
     }
 
-    fun pagingSource() = Pager(config = PagingConfig(
-        pageSize = PokemonApi.LIMIT, enablePlaceholders = false
-    ), pagingSourceFactory = {
-
-        PokemonPagingSource(pokemonApi, PagingParams(""))
-    }).flow
-
-
     suspend fun getOne(id: String): PokemonDetalhesDTO? {
         try {
 
