@@ -9,9 +9,9 @@ import com.sntsb.mypokedex.data.model.dto.PokemonDTO
 import com.sntsb.mypokedex.data.model.dto.PokemonDetalhesDTO
 import com.sntsb.mypokedex.data.model.dto.StatusDTO
 import com.sntsb.mypokedex.data.model.dto.TipoDTO
+import com.sntsb.mypokedex.data.paging.PagingParams
 import com.sntsb.mypokedex.data.paging.PokemonPagingSource
 import com.sntsb.mypokedex.utils.PokemonUtils
-import com.sntsb.mypokedex.utils.StringUtils
 import javax.inject.Inject
 
 /** Classe que define o repositório de dados do aplicativo (faz chamadas para API) **/
@@ -21,9 +21,7 @@ class TipoRepository @Inject constructor(private val pokemonApi: PokemonApi) {
 
         return Pager(config = PagingConfig(pageSize = 20, enablePlaceholders = false),
             pagingSourceFactory = {
-                PokemonPagingSource(pokemonApi).apply {
-                    this.query = query
-                }
+                PokemonPagingSource(pokemonApi, PagingParams(query))
             })
 
     }
@@ -51,8 +49,18 @@ class TipoRepository @Inject constructor(private val pokemonApi: PokemonApi) {
                 }
 
                 val imagemArray = ArrayList<ImagemDTO>()
-                imagemArray.add(ImagemDTO(ImagemDTO.IMAGEM_FRONT, PokemonUtils.getPokemonImageUrl(pokemon.id)))
-                imagemArray.add(ImagemDTO(ImagemDTO.IMAGEM_SHINY, PokemonUtils.getPokemonShinyImageUrl(pokemon.id)))
+                imagemArray.add(
+                    ImagemDTO(
+                        ImagemDTO.IMAGEM_FRONT,
+                        PokemonUtils.getPokemonImageUrl(pokemon.id)
+                    )
+                )
+                imagemArray.add(
+                    ImagemDTO(
+                        ImagemDTO.IMAGEM_SHINY,
+                        PokemonUtils.getPokemonShinyImageUrl(pokemon.id)
+                    )
+                )
 
                 PokemonDetalhesDTO(
                     pokemon.id,

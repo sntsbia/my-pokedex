@@ -3,30 +3,43 @@ package com.sntsb.mypokedex.data.repository
 import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.PagingSource
 import com.sntsb.mypokedex.data.api.PokemonApi
 import com.sntsb.mypokedex.data.model.dto.ImagemDTO
 import com.sntsb.mypokedex.data.model.dto.PokemonDTO
 import com.sntsb.mypokedex.data.model.dto.PokemonDetalhesDTO
 import com.sntsb.mypokedex.data.model.dto.StatusDTO
 import com.sntsb.mypokedex.data.model.dto.TipoDTO
+import com.sntsb.mypokedex.data.paging.PagingParams
 import com.sntsb.mypokedex.data.paging.PokemonPagingSource
 import com.sntsb.mypokedex.utils.PokemonUtils
-import com.sntsb.mypokedex.utils.StringUtils
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 /** Classe que define o repositório de dados do aplicativo (faz chamadas para API) **/
 class PokemonRepository @Inject constructor(private val pokemonApi: PokemonApi) {
 
-    val pagingSource = fun(query: String): Pager<Int, PokemonDTO> {
 
-        return Pager(config = PagingConfig(pageSize = 20, enablePlaceholders = false),
-            pagingSourceFactory = {
-                PokemonPagingSource(pokemonApi).apply {
-                    this.query = query
-                }
-            })
-
+    private fun getPagingSource(filtro: String): PagingSource<Int, PokemonDTO> {
+        val pagingParams = PagingParams(
+            filter = filtro
+        )
+        return PokemonPagingSource(pokemonApi, pagingParams)
     }
+
+    fun getPager(filtro: String): Flow<PagingData<PokemonDTO>> {
+        return Pager(config = PagingConfig(pageSize = PokemonApi.LIMIT),
+            pagingSourceFactory = { getPagingSource(filtro) }).flow
+    }
+
+    fun pagingSource() = Pager(config = PagingConfig(
+        pageSize = PokemonApi.LIMIT, enablePlaceholders = false
+    ), pagingSourceFactory = {
+
+        PokemonPagingSource(pokemonApi, PagingParams(""))
+    }).flow
+
 
     suspend fun getOne(id: String): PokemonDetalhesDTO? {
         try {
@@ -51,8 +64,18 @@ class PokemonRepository @Inject constructor(private val pokemonApi: PokemonApi) 
                 }
 
                 val imagemArray = ArrayList<ImagemDTO>()
-                imagemArray.add(ImagemDTO(ImagemDTO.IMAGEM_FRONT, PokemonUtils.getPokemonImageUrl(pokemon.id)))
-                imagemArray.add(ImagemDTO(ImagemDTO.IMAGEM_SHINY, PokemonUtils.getPokemonShinyImageUrl(pokemon.id)))
+                imagemArray.add(
+                    ImagemDTO(
+                        ImagemDTO.IMAGEM_FRONT,
+                        PokemonUtils.getPokemonImageUrl(pokemon.id)
+                    )
+                )
+                imagemArray.add(
+                    ImagemDTO(
+                        ImagemDTO.IMAGEM_SHINY,
+                        PokemonUtils.getPokemonShinyImageUrl(pokemon.id)
+                    )
+                )
 
                 PokemonDetalhesDTO(
                     pokemon.id,

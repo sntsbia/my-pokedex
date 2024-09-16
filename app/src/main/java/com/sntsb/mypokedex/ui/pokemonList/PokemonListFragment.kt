@@ -1,15 +1,13 @@
-package com.sntsb.mypokedex.ui
+package com.sntsb.mypokedex.ui.pokemonList
 
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.launch
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import br.com.intelipec.firebase.dropdown.DropdownTipoList
@@ -21,6 +19,7 @@ import com.sntsb.mypokedex.utils.UiUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class PokemonListFragment : Fragment() {
@@ -39,46 +38,40 @@ class PokemonListFragment : Fragment() {
 
         pokemonAdapter = ItemPokemonAdapter(requireContext())
         binding.rvPokemons.adapter = pokemonAdapter
-        binding.rvPokemons.layoutManager = GridLayoutManager(requireContext(),2)
+        binding.rvPokemons.layoutManager = GridLayoutManager(requireContext(), 2)
 
         binding.swipeRefreshLayout.setOnRefreshListener {
 
-            mPokemonListViewModel.refreshPokemonList()
+            mPokemonListViewModel.setQueryString("")
             binding.rvPokemons.layoutManager?.scrollToPosition(0)
 
         }
         initDropdown()
 
-        lifecycleScope.launch {
 
-            mPokemonListViewModel.searchQuery.observe(viewLifecycleOwner) { query ->
-                mPokemonListViewModel.getPokemonPager(query)
-            }
+        mPokemonListViewModel.setQueryString("")
 
-            mPokemonListViewModel.loading.observe(viewLifecycleOwner) { loading ->
-                setLoading(loading)
-            }
-
-            mPokemonListViewModel.pokemonPager.collectLatest { pagingData ->
-                Log.e(TAG, "onViewCreated: atualizou")
-
-                pokemonAdapter.submitData(pagingData)
-
-            }
+        mPokemonListViewModel.loading.observe(viewLifecycleOwner) { loading ->
+            setLoading(loading)
         }
 
-        lifecycleScope.launch {
+        mPokemonListViewModel.pagingData.observe(viewLifecycleOwner) { pagingData ->
+            pokemonAdapter.submitData(viewLifecycleOwner.lifecycle, pagingData)
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
             pokemonAdapter.loadStateFlow.collectLatest { loadStates ->
                 mPokemonListViewModel.setLoading(loadStates.refresh is LoadState.Loading)
             }
         }
 
         binding.radioGroup.setOnCheckedChangeListener { radioGroup, id ->
-            when (id){
+            when (id) {
                 binding.radioPokemon.id -> {
                     binding.llSearch.visibility = View.VISIBLE
                     binding.tilDdSearch.visibility = View.GONE
                 }
+
                 binding.radioTipo.id -> {
                     binding.llSearch.visibility = View.GONE
                     binding.tilDdSearch.visibility = View.VISIBLE
@@ -88,10 +81,15 @@ class PokemonListFragment : Fragment() {
 
         binding.btnSearch.setOnClickListener {
             val query = binding.txtSearch.text.toString()
-            if(mPokemonListViewModel.searchQuery.value != query) {
+            if (mPokemonListViewModel.searchQuery.value != query) {
 
-                mPokemonListViewModel.setSearchQuery(StringUtils.todasMinusculas(query))
+                mPokemonListViewModel.setQueryString(StringUtils.todasMinusculas(query))
             }
+        }
+
+        binding.tilSearch.setEndIconOnClickListener {
+            binding.txtSearch.setText("")
+            mPokemonListViewModel.setQueryString("")
         }
     }
 
