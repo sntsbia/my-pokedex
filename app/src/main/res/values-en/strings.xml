@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">My Pokedex</string>
+
+    <!--    Status -->
+    <string name="hp">HP</string>
+    <string name="attack">Attacke</string>
+    <string name="defense">Defense</string>
+    <string name="special_attack">Special Attack</string>
+    <string name="special_defense">Special Defense</string>
+    <string name="speed">Speed</string>
+    <string name="total">Total</string>
+
+    <!--    Tipos -->
+    <string name="none">None</string>
+    <string name="unknown">Unknown</string>
+    <string name="normal">Normal</string>
+    <string name="fighting">Fighting</string>
+    <string name="flying">Flying</string>
+    <string name="poison">Poison</string>
+    <string name="ground">Ground</string>
+    <string name="rock">Rock</string>
+    <string name="bug">Bug</string>
+    <string name="ghost">Ghost</string>
+    <string name="steel">Steel</string>
+    <string name="fire">Fire</string>
+    <string name="water">Water</string>
+    <string name="grass">Grass</string>
+    <string name="electric">Electric</string>
+    <string name="psychic">Psychic</string>
+    <string name="ice">Ice</string>
+    <string name="dragon">Dragon</string>
+    <string name="dark">Dark</string>
+    <string name="fairy">Fairy</string>
+    <string name="shadow">Shadow</string>
+    <string name="altura">Height:</string>
+    <string name="peso">Weight:</string>
+    <string name="pokemon">Pokemon</string>
+    <string name="tipo">Type</string>
+    <string name="no_info">Empty List</string>
+
+    <string name="pesquisar_por_tipo">Search by type</string>
+    <string name="pesquisar_por_nome_ou_id">Search by name or ID</string>
+
+</resources>

@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="8dp">
 
                 <LinearLayout
                     android:id="@+id/ll_dd_search"
@@ -46,7 +46,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="text"
-                            android:text=""
+                            android:text="@string/pesquisar_por_tipo"
                             android:textAppearance="?attr/textAppearanceBody2" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -85,7 +85,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="text"
-                            android:text=""
+                            android:text="@string/pesquisar_por_nome_ou_id"
                             android:textAppearance="?attr/textAppearanceBody2" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -113,14 +113,14 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:checked="true"
-                        android:text="Pokemon" />
+                        android:text="@string/pokemon" />
 
                     <RadioButton
                         android:id="@+id/radio_tipo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Tipo" />
+                        android:text="@string/tipo" />
 
 
                 </RadioGroup>
@@ -131,7 +131,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="Sem Informações"
+                    android:text="@string/no_info"
                     android:visibility="gone" />
 
                 <androidx.recyclerview.widget.RecyclerView

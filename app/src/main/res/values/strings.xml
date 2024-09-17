@@ -32,5 +32,12 @@
     <string name="dark">Noturno</string>
     <string name="fairy">Fada</string>
     <string name="shadow">Sombra</string>
+    <string name="altura">Altura:</string>
+    <string name="peso">Peso:</string>
+    <string name="pokemon">Pokemon</string>
+    <string name="tipo">Tipo</string>
+    <string name="no_info">Sem Informações</string>
+    <string name="pesquisar_por_tipo">Pesquisar por tipo</string>
+    <string name="pesquisar_por_nome_ou_id">Pesquisar por nome ou ID</string>
 
 </resources>

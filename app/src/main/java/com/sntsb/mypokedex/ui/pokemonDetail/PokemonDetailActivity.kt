@@ -103,6 +103,7 @@ class PokemonDetailActivity : AppCompatActivity() {
         with(binding) {
             Log.e(TAG, "initDados: $pokemon")
             tvDescricao.text = StringUtils.primeiraLetraCapitalize(pokemon.nome)
+            tvId.text = pokemon.id.toString()
 
             llFundo.setBackgroundResource(UiUtils(this@PokemonDetailActivity).getCorTipo(pokemon.tipos[0].descricao))
 

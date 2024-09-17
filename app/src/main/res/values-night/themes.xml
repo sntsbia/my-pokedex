@@ -2,9 +2,7 @@
 <resources>
     <style name="Theme.MyPokedex" parent="Theme.Material3.Dark">
 
-        <item name="backgroundColor">@color/color_base</item>
-        <item name="colorOnPrimary">@color/color_texto</item>
-        <item name="android:statusBarColor">@color/color_secondary</item>
+      
 
     </style>
 

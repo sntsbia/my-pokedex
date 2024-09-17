@@ -11,7 +11,7 @@
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.Toolbar
@@ -45,14 +45,13 @@
                 android:layout_width="match_parent"
                 app:layout_constraintTop_toBottomOf="@id/progressbar_details"
                 android:layout_height="match_parent"
-                android:background="@color/color_agua"
+                android:background="@color/color_detalhes"
                 android:orientation="vertical"
                 >
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_margin="16dp"
                     app:cardCornerRadius="16dp"
-                    app:strokeWidth="1dp"
                     android:layout_height="match_parent">
 
                     <RelativeLayout
@@ -60,20 +59,39 @@
                         android:layout_height="match_parent"
                         android:padding="16dp">
 
-                        <com.google.android.material.textview.MaterialTextView
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:text="Pokemon"
-                            android:textAlignment="center"
-                            style="@style/TextAppearance.Material3.TitleLarge"
-                            android:id="@+id/tv_descricao"/>
+                            android:id="@+id/cl_descricao"
+                            android:layout_height="wrap_content">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toStartOf="@id/tv_id"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:text="Pokemon"
+                                android:textAlignment="center"
+                                style="@style/TextAppearance.Material3.TitleLarge"
+                                android:id="@+id/tv_descricao"/>
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:id="@+id/tv_id"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:text="123"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/ll_detalhes"
-                            android:layout_below="@id/tv_descricao"
+                            android:layout_below="@id/cl_descricao"
                             android:gravity="center">
 
                             <androidx.constraintlayout.widget.ConstraintLayout
@@ -89,7 +107,7 @@
                                     android:id="@+id/tv_altura_label"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Altura:"
+                                    android:text="@string/altura"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent"
                                     app:layout_constraintBottom_toBottomOf="parent"/>
@@ -119,7 +137,7 @@
                                     android:id="@+id/tv_peso_label"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Peso:"
+                                    android:text="@string/peso"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent"
                                     app:layout_constraintBottom_toBottomOf="parent"/>
@@ -129,7 +147,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="8dp"
-                                    android:text="10 dm"
+                                    android:text="10 kg"
                                     app:layout_constraintStart_toEndOf="@id/tv_peso_label"
                                     app:layout_constraintTop_toTopOf="parent"
                                     app:layout_constraintBottom_toBottomOf="parent"/>
@@ -153,7 +171,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:src="@drawable/ic_baseline_arrow_left_24"
-                                android:background="#00FFFFFF"/>
+                                android:background="@color/color_transparente"/>
                             <ImageView
                                 android:id="@+id/iv_pokemon"
                                 android:layout_width="128dp"
@@ -166,7 +184,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:src="@drawable/ic_baseline_arrow_right_24"
-                                android:background="#00FFFFFF"/>
+                                android:background="@color/color_transparente"/>
 
                         </LinearLayout>
 

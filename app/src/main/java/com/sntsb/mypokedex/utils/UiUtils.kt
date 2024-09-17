@@ -79,27 +79,27 @@ class UiUtils (val context: Context) {
     fun getCorTipo(tipo: String): Int {
         when (tipo) {
 
-            "normal" -> return R.color.color_normal
-            "fighting" -> return R.color.color_lutador
-            "flying" -> return R.color.color_voador
-            "poison" -> return R.color.color_veneno
-            "ground" -> return R.color.color_terra
-            "rock" -> return R.color.color_pedra
-            "bug" -> return R.color.color_inseto
-            "ghost" -> return R.color.color_fantasma
-            "steel" -> return R.color.color_metalico
-            "fire" -> return R.color.color_fogo
-            "water" -> return R.color.color_agua
-            "grass" -> return R.color.color_grama
-            "electric" -> return R.color.color_eletrico
-            "psychic" -> return R.color.color_psiquico
-            "ice" -> return R.color.color_gelo
-            "dragon" -> return R.color.color_dragao
-            "dark" -> return R.color.color_azul_escuro
-            "fairy" -> return R.color.color_fada
+            "normal" -> return R.color.color_pokemon_normal
+            "fighting" -> return R.color.color_pokemon_lutador
+            "flying" -> return R.color.color_pokemon_voador
+            "poison" -> return R.color.color_pokemon_veneno
+            "ground" -> return R.color.color_pokemon_terra
+            "rock" -> return R.color.color_pokemon_pedra
+            "bug" -> return R.color.color_pokemon_inseto
+            "ghost" -> return R.color.color_pokemon_fantasma
+            "steel" -> return R.color.color_pokemon_metalico
+            "fire" -> return R.color.color_pokemon_fogo
+            "water" -> return R.color.color_pokemon_agua
+            "grass" -> return R.color.color_pokemon_grama
+            "electric" -> return R.color.color_pokemon_eletrico
+            "psychic" -> return R.color.color_pokemon_psiquico
+            "ice" -> return R.color.color_pokemon_gelo
+            "dragon" -> return R.color.color_pokemon_dragao
+            "dark" -> return R.color.color_pokemon_sombrio
+            "fairy" -> return R.color.color_pokemon_fada
         }
 
-        return R.color.color_secondary
+        return R.color.color_secundaria_roxo
     }
 
 
