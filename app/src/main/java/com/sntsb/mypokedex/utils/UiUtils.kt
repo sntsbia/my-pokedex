@@ -2,6 +2,7 @@ package com.sntsb.mypokedex.utils
 
 import android.content.Context
 import android.util.Log
+import com.google.android.material.snackbar.Snackbar
 import com.sntsb.mypokedex.R
 
 class UiUtils (val context: Context) {
@@ -101,7 +102,6 @@ class UiUtils (val context: Context) {
 
         return R.color.color_secundaria_roxo
     }
-
 
 
 }

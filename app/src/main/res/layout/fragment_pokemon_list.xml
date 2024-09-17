@@ -140,10 +140,16 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="8dp" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/view_snackbar"/>
             </LinearLayout>
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
+
 
 </FrameLayout>

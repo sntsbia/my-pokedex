@@ -45,4 +45,8 @@
     <string name="pesquisar">Search</string>
     <string name="limpar">Clear</string>
 
+    <string name="conexao_restaurada">Connection restored</string>
+    <string name="sem_conexao">No connection</string>
+    <string name="info_sem_conexao">No connection</string>
+
 </resources>
