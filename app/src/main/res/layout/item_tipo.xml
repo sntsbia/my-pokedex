@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="TipoItemDataBinding"
+            type="com.sntsb.mypokedex.data.model.dto.TipoDTO" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <ImageView
+            android:contentDescription="Informação sobre o tipo"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_pokeball_36"
+            android:id="@+id/iv_tipo"/>
+    </LinearLayout>
+</layout>

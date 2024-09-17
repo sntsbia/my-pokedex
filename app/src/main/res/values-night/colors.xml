@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="color_background">#121212</color>
+    <color name="color_splash">#0D1117</color>
+
+    <color name="color_texto">#EEEEEE</color>
+    <color name="color_background_card">#212121</color>
+    <color name="color_detalhes">#424242</color>
+    <color name="color_secundaria_roxo">#B37B68EE</color>
+    <color name="color_secundaria_azul">#B366AFE9</color>
+    <color name="color_success">#B35CB85C</color>
+    <color name="color_error">#B3C9304D</color>
+
+    <color name="color_pokemon_normal">#BF6A6A</color>
+    <color name="color_pokemon_fogo">#FD7C4D</color>
+    <color name="color_pokemon_agua">#4D4DAD</color>
+    <color name="color_pokemon_grama">#64AD64</color>
+    <color name="color_pokemon_eletrico">#FDE24D</color>
+    <color name="color_pokemon_psiquico">#A54DA5</color>
+    <color name="color_pokemon_gelo">#E0FFFF</color>
+    <color name="color_pokemon_lutador">#C86464</color>
+    <color name="color_pokemon_voador">#7995E9</color>
+    <color name="color_pokemon_terra">#AD7C5A</color>
+    <color name="color_pokemon_pedra">#959595</color>
+    <color name="color_pokemon_inseto">#32CC32</color>
+    <color name="color_pokemon_fantasma">#804DA6</color>
+    <color name="color_pokemon_dragao">#B76FDA</color>
+    <color name="color_pokemon_sombrio">#4D4D4D</color>
+    <color name="color_pokemon_metalico">#7DA6CA</color>
+    <color name="color_pokemon_fada">#FD95CA</color>
+    <color name="color_pokemon_veneno">#A54DA5</color>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+</resources>

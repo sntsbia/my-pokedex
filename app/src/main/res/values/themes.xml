@@ -1,5 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.MyPokedex" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.MyPokedex" parent="Theme.Material3.DayNight">
+
+        <item name="backgroundColor">@color/color_background</item>
+        <item name="android:statusBarColor">@color/color_background</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="colorOnPrimary">@color/color_texto</item>
+
+        <item name="colorPrimary">@color/color_secundaria_azul</item>
+        <!--  Secondary brand color.  -->
+        <item name="colorSecondary">@color/color_secundaria_roxo</item>
+        <item name="colorOnSecondary">@color/color_texto</item>
+
+        <item name="textInputOutlinedStyle">@style/MyTextInputLayoutOutlinedBox</item>
+        <item name="textInputStyle">@style/MyTextInputLayoutOutlinedBox</item>
+        <item name="materialCardViewStyle">@style/MyMaterialCardView</item>
+
+    </style>
+
+    <style name="MyTextInputLayoutOutlinedBox" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/color_texto</item>
+        <item name="errorTextColor">@color/color_error</item>
+        <item name="endIconTint">@color/color_texto</item>
+        <item name="startIconTint">@color/color_texto</item>
+
+        <item name="errorIconTint">@color/color_error</item>
+    </style>
+
+    <style name="MyMaterialCardView" parent="Widget.Material3.CardView.Elevated">
+        <item name="strokeWidth">0dp</item>
+        <item name="cornerRadius">15dp</item>
+        <item name="cardBackgroundColor">@color/color_background_card</item>
+        <item name="contentPadding">4dp</item>
+    </style>
+
+
+
 </resources>
