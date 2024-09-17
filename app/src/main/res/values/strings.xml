@@ -39,5 +39,7 @@
     <string name="no_info">Sem Informações</string>
     <string name="pesquisar_por_tipo">Pesquisar por tipo</string>
     <string name="pesquisar_por_nome_ou_id">Pesquisar por nome ou ID</string>
+    <string name="limpar">Limpar</string>
+    <string name="pesquisar">Pesquisar</string>
 
 </resources>

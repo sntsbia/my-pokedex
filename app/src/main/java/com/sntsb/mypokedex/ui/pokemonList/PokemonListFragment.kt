@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import br.com.intelipec.firebase.dropdown.DropdownTipoList
+import com.sntsb.mypokedex.R
 import com.sntsb.mypokedex.data.model.enums.TiposEnum
 import com.sntsb.mypokedex.databinding.FragmentPokemonListBinding
 import com.sntsb.mypokedex.ui.adapter.ItemPokemonAdapter
@@ -45,7 +46,8 @@ class PokemonListFragment : Fragment() {
                     setLoading(loading)
                 }
             }))
-        binding.rvPokemons.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.rvPokemons.layoutManager = GridLayoutManager(requireContext(), resources.getInteger(
+            R.integer.colunas_grid))
 
         binding.swipeRefreshLayout.setOnRefreshListener {
 

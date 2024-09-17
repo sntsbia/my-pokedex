@@ -118,7 +118,7 @@ class PokemonDetailActivity : AppCompatActivity() {
 
             tipoAdapter = TipoAdapter(pokemon.tipos, this@PokemonDetailActivity)
             rvTipos.adapter = tipoAdapter
-            rvTipos.layoutManager = GridLayoutManager(this@PokemonDetailActivity, 3)
+            rvTipos.layoutManager = GridLayoutManager(this@PokemonDetailActivity, resources.getInteger(R.integer.colunas_grid))
 
             statusAdapter = StatusAdapter(pokemon.status, this@PokemonDetailActivity)
             rvDetalhes.adapter = statusAdapter

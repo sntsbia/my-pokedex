@@ -42,5 +42,7 @@
 
     <string name="pesquisar_por_tipo">Search by type</string>
     <string name="pesquisar_por_nome_ou_id">Search by name or ID</string>
+    <string name="pesquisar">Search</string>
+    <string name="limpar">Clear</string>
 
 </resources>
