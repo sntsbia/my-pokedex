@@ -52,3 +52,5 @@ Sinta-se à vontade para contribuir com melhorias e correções.
 ---
 
 Este projeto está em constante desenvolvimento e novas funcionalidades serão adicionadas.
+
+Beatriz Santos (@sntsb)
